@@ -1,0 +1,14 @@
+.dashboard {
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.dashboard .inner > div {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.dashboard .inner > div + div {
+  margin-top: 8px;
+}
