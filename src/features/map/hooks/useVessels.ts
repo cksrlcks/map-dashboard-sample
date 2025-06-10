@@ -30,7 +30,7 @@ export default function useVessels() {
   }, []);
 
   return {
-    vessels,
+    data: vessels,
     isLoading,
   };
 }

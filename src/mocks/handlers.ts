@@ -1,4 +1,4 @@
-import { http, HttpResponse } from "msw";
+import { delay, http, HttpResponse } from "msw";
 import data from "./data.json";
 
 const vesselsState = data.map(() => ({
@@ -6,7 +6,7 @@ const vesselsState = data.map(() => ({
   direction: 1,
 }));
 
-const vesselHandler = http.get("/api/vessel", () => {
+const vesselHandler = http.get("/api/vessel", async () => {
   const updatedFleet = data.map((vessel, i) => {
     const state = vesselsState[i];
     const path = vessel.path;
@@ -26,6 +26,8 @@ const vesselHandler = http.get("/api/vessel", () => {
     };
   });
 
+  await delay(100);
+
   return HttpResponse.json(updatedFleet);
 });
 
@@ -33,7 +35,7 @@ function getRandomValue(min: number, max: number) {
   return +(Math.random() * (max - min) + min).toFixed(2);
 }
 
-const chartHandler = http.get("/api/chart", () => {
+const chartHandler = http.get("/api/chart", async () => {
   const randomValues = [
     {
       id: "pm25",
@@ -63,7 +65,25 @@ const chartHandler = http.get("/api/chart", () => {
       value: getRandomValue(0, 0.3),
     },
   ];
+
+  await delay(500);
+
   return HttpResponse.json(randomValues);
 });
 
-export const handlers = [vesselHandler, chartHandler];
+const deviceHandler = http.get("/api/device", async () => {
+  const deviceData = {
+    name: "Device 1",
+    position: {
+      lat: 35.049106912862484,
+      lng: 129.00636920049143,
+    },
+    range: 0.25 * 1000,
+  };
+
+  await delay(2000);
+
+  return HttpResponse.json(deviceData);
+});
+
+export const handlers = [vesselHandler, chartHandler, deviceHandler];
