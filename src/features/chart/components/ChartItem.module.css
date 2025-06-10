@@ -1,0 +1,98 @@
+.chartItem {
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  transition: background 0.3s ease;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.chartItem[data-alert="true"] {
+  background: rgb(250, 190, 153);
+}
+
+.chartInner {
+  background: #fff;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.container {
+  width: 100%;
+  height: 30px;
+  background: #eee;
+  position: relative;
+}
+
+.bar {
+  height: 100%;
+  background: #4caf50;
+  transition: width 0.3s ease;
+  display: flex;
+  position: relative;
+}
+
+.barLabel {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.barLabel[data-dir="right"] {
+  right: 0;
+  transform: translateY(-50%) translateX(calc(100% + 10px));
+  color: #000;
+}
+
+.gaugeContainer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #ccc;
+  margin-top: 6px;
+}
+
+.gauge {
+  height: 20px;
+  font-size: 10px;
+  color: #666;
+  position: relative;
+}
+
+.gaugeLabel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.gauge:first-child .gaugeLabel {
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.gauge:last-child .gaugeLabel {
+  left: auto;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.label {
+  font-size: 12px;
+  color: #666;
+}
+
+.standard {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 2px;
+  height: calc(100% + 10px);
+  transform: translate(-1px, -50%);
+  background: #fc0;
+}

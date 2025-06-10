@@ -29,4 +29,41 @@ const vesselHandler = http.get("/api/vessel", () => {
   return HttpResponse.json(updatedFleet);
 });
 
-export const handlers = [vesselHandler];
+function getRandomValue(min: number, max: number) {
+  return +(Math.random() * (max - min) + min).toFixed(2);
+}
+
+const chartHandler = http.get("/api/chart", () => {
+  const randomValues = [
+    {
+      id: "pm25",
+      label: "PM2.5 (µg/m³)",
+      min: 0,
+      max: 200,
+      step: 5,
+      standard: 50,
+      value: getRandomValue(0, 200),
+    },
+    {
+      id: "so2",
+      label: "SO2 (ppm)",
+      min: 0,
+      max: 0.2,
+      step: 5,
+      standard: 0.05,
+      value: getRandomValue(0, 0.2),
+    },
+    {
+      id: "no2",
+      label: "NO2 (ppm)",
+      min: 0,
+      max: 0.3,
+      step: 4,
+      standard: 0.05,
+      value: getRandomValue(0, 0.3),
+    },
+  ];
+  return HttpResponse.json(randomValues);
+});
+
+export const handlers = [vesselHandler, chartHandler];
